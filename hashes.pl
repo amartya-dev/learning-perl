@@ -32,3 +32,16 @@ print "The name of placeA is $name{placeA}\n";
 # Adding values to hash
 $where{d} = "placeD";
 print "The place of d is $where{d}\n";
+
+# Removing an entry from the hash
+delete $where{d};
+
+# Accessing keys
+for (keys %where) {
+    print "$_ lives in $where{$_}\n";
+}
+
+# Accessing values
+for (values %where) {
+    print "$name{$_} lives in $_\n";
+}
