@@ -668,14 +668,14 @@ if (/hello/i) {
 - Anchors are used to specify the start and end for the regex, `^` and `$` are used respectively.
 - `[]` represents either of the specified things within that
 - Some shortcuts
-| Shortcut | Expression | Description |
-| [[:alpha:]] | [a-zA-Z] | An alphabetic character |
-| [[:alnum:]] | [0-9A-Za-z] | An aphabetic or numeric character |
-| [[:digit:]] | \d | A digit, 0-9 |
-| [[:lower:]] | [a-z] | A lower case letter |
-| [[:upper:]] | [A-Z] | An upper case letter |
-| [[:punct:]] | `[!"#$%&'()*+,-
-./:;<=>?@\[\\\]^_`{|}~]` | A punctuation character |
+| Shortcut    | Expression      | Description                       |
+| ----------- | --------------- | --------------------------------- |
+| [[:alpha:]] | [a-zA-Z]        | An alphabetic character           |
+| [[:alnum:]] | [0-9A-Za-z]     | An aphabetic or numeric character |
+| [[:digit:]] | \d              | A digit, 0-9                      |
+| [[:lower:]] | [a-z]           | A lower case letter               |
+| [[:upper:]] | [A-Z]           | An upper case letter              |
+| [[:punct:]] | `[!"#$%&'()*+,-` | A punctuation character           |
 
 #### Split
 - Used to break up a string into a list of words
