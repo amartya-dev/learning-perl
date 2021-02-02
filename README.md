@@ -627,3 +627,86 @@ OUTER: while (<STDIN>) {
     print "Hey, you said $_\n";
 }
 ```
+
+## Regular Expressions
+- `split` fucntion can be used to break each of the lines provided into a list of 'words', although it keeps all the punctuation.
+- Simple pattern matching can be acheived by the following way:
+```perl
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+$_ = "Nobody wants to hurt you ... 'cept, I do hurt people sometimes, Case.";
+
+if (_$ =~ /people/) {
+    print "Found word 'people'\n";
+}
+```
+
+- The text to be found is put between forward slashes, which is the regex, the `~=` is used to specify which string we are looking for in that pattern, this returns 1 if the pattern is found 
+- The word not being found is tested by `!~`, example:
+```perl
+if ($_ !~ /hello/) {
+    print "No hello found";
+}
+```
+
+- We can also direcly match something like this:
+```perl
+# In continuation with the $_ defined above
+if (/I do/) {
+    print "'I do' is in the string";
+}
+```
+- To make the matching case insensitive, we need to add `i` after the closing slash, something like:
+```perl
+if (/hello/i) {
+    print "Insensitive hello matches";
+}
+```
+- The resitrcited regex keywords need to be taken care of ofc, i.e. stuff like `. * ? + [ ] ( ) { } ^ $ | \` needs to be escaped using an extra `\`
+- Anchors are used to specify the start and end for the regex, `^` and `$` are used respectively.
+- `[]` represents either of the specified things within that
+- Some shortcuts
+| Shortcut | Expression | Description |
+| [[:alpha:]] | [a-zA-Z] | An alphabetic character |
+| [[:alnum:]] | [0-9A-Za-z] | An aphabetic or numeric character |
+| [[:digit:]] | \d | A digit, 0-9 |
+| [[:lower:]] | [a-z] | A lower case letter |
+| [[:upper:]] | [A-Z] | An upper case letter |
+| [[:punct:]] | `[!"#$%&'()*+,-
+./:;<=>?@\[\\\]^_`{|}~]` | A punctuation character |
+
+#### Split
+- Used to break up a string into a list of words
+- `split /\s+/, $_;` is used to break the default substring to a list of substrings using whitespace as a delimiter.
+```perl
+#!/usr/bin/perl
+# split.plx
+use warnings;
+use strict;
+my $passwd = "kake:x:10018:10020::/home/kake:/bin/bash";
+my @fields = split /:/, $passwd;
+print "Login name : $fields[0]\n";
+print "User ID : $fields[2]\n";
+print "Home directory : $fields[5]\n";
+```
+
+#### Join
+- Exact opposite of split 
+```perl
+#!/usr/bin/perl
+# join.plx
+use warnings;
+use strict;
+my $passwd = "kake:x:10018:10020::/home/kake:/bin/bash";
+my @fields = split /:/, $passwd;
+print "Login name : $fields[0]\n";
+print "User ID : $fields[2]\n";
+print "Home directory : $fields[5]\n";
+my $passwd2 = join "#", @fields;
+print "Original password : $passwd\n";
+print "New password :
+$passwd2\n";
+```
+- Join basically takes a specified delimiter and interposes it between elements of a specified array
