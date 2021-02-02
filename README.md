@@ -436,3 +436,80 @@ for ($choice) {
 ...
 }
 ```
+- Unless can be used like an opposite of if something like:
+```perl
+unless (exists $rates($to)) {
+    die "I do not know anything about {$to} as a currency \n";
+}
+```
+- `unless` can also be use in this other way:
+```perl
+die "statement" unless extsts $rates{$to}
+```
+
+- Another way to write an if else in a sort of short way is:
+```perl
+exists $rates{$to} or die "statement"
+```
+
+## For loops
+- A `for` loop in perl is basically `foreach`, i.e., it only works with an iterator and a list / array to get stuff from:
+```perl
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+my @array = (1, 3, 5, 7, 9);
+
+my $i;
+for $i (@array) {
+    print "The element encountered is $i\n";
+}
+```
+ - Since `for` loop is basically `foreach`, perl allows you to use both words:
+ ```perl
+ foreach $i (@array) {
+     print "The element encountered is $i";
+ }
+ ```
+
+- Decalring the iterator with the for statement creates a new variable every time the loop runs and that will exist only during the duration of the loop:
+```perl
+my @array = (1, 3, 5, 7, 9);
+
+for my $i (@array) {
+    print "The element encountered is $i\n";
+}
+```
+
+- When we change the iterator, the value in the original array gets updated, that is because for loop creates an alias rather than a value:
+```perl
+#!/usr/bin/perl
+# forloop5.plx
+use warnings;
+use strict;
+my @array = (1..10);
+foreach (@array) {
+    $_++;
+}
+print "Array is now: @array\n";
+# The output is 2 3 4 5 6 7 8 9 10 11
+```
+
+- This does not work if we are dealing with a list supplied as the iterable:
+```perl
+foreach (1, 2, 3) {
+    $_++; # Throws an error
+}
+```
+- The short forms like using unless or if after the statement are called segment modifiers, there is a segment modifier for `for` too:
+```perl
+#!usr/bin/perl
+use warnings;
+use strict;
+
+my $total = 0;
+$total += $_ for @ARGV;
+print "The sum for the supplied numbers in args is : $total\n";
+```
+    - The `@ARGV` is an array of the command line arguments supplied while running the program, they are automatically parsed by perl and converted into the datatype that makes sense for them, you could also pass suff inside `""`, those will be parsed as strings.
