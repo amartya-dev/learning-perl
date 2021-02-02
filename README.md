@@ -512,4 +512,118 @@ my $total = 0;
 $total += $_ for @ARGV;
 print "The sum for the supplied numbers in args is : $total\n";
 ```
-    - The `@ARGV` is an array of the command line arguments supplied while running the program, they are automatically parsed by perl and converted into the datatype that makes sense for them, you could also pass suff inside `""`, those will be parsed as strings.
+
+- The `@ARGV` is an array of the command line arguments supplied while running the program, they are automatically parsed by perl and converted into the datatype that makes sense for them, you could also pass suff inside `""`, those will be parsed as strings.
+
+## While loops 
+- General synax is : `while {<condition>} {<action>}
+```perl
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+my $countdown = 5;
+
+while ($countdown > 0) {
+    print "Counting down: $countdown";
+}
+```
+
+- Example while loop to stop when the user stops inputting values:
+```perl
+#!usr/bin/perl
+use warnings;
+use strict;
+
+while (<STDIN>) {
+    chomp; # Remove the \n from consideration
+    die "end";
+    my $entered = $_;
+    print "Entered $_";
+}
+```
+
+- `do while` can be used to run a condition at least once:
+```perl
+#!usr/bin/perl
+use warnings;
+use strict;
+
+do {
+    $_ = <STDIN>;
+    chomp;
+    my $entered = $_;
+    print "Entered $entered";
+} while ($_) {
+    print "End all";
+}
+```
+
+- Statement modifier for `while` is something like:
+```perl
+$my countdown = 5;
+print "Counting down: $countdown" while $countdown-- > 0;
+```
+
+- The opposite of `while` is `until`, while `while` checks the condition and executes block if it is true, `until` checks condition and executes block if it evaluates to false:
+```perl
+#!usr/bin/perl
+use warnings;
+use strict;
+
+my $countdown = 5;
+
+until ($countdown-- == 0) {
+    print "Counting down $countdown\n";
+}
+```
+
+- `break` is `last` in perl whereas `continue` is `next`:
+```perl
+#!usr/bin/perl
+use warnings;
+use strict;
+
+while (<STDIN>) {
+    chomp;
+    last unless $_;
+    my $reversed = reverse $_;
+    print "Reversed String is $_";
+}
+
+# using last in for loop
+my @array = ("red", "green", "Stop", "blue");
+
+for (@array) {
+    last if $_ eq "Stop";
+    print "Color : $_";
+}
+
+# using next
+
+my @array = (8, 3, 0, 2, 12, 0);
+for (@array) {
+    if ($_ == 0) {
+        print "Skipping";
+        next;
+    }
+    print "Number : $_";
+}
+```
+
+- We can name our loops and use them accordingly in perl something like:
+```perl
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+my @end = (quit leave stop finish);
+
+OUTER: while (<STDIN>) {
+    chomp;
+    INNER: for my $check (@end) {
+        last OUTER if $check eq $_;
+    }
+    print "Hey, you said $_\n";
+}
+```
